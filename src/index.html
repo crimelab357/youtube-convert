@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YT Converter Pro | Download YouTube Videos & Audio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://www.youtube.com/s/desktop/d5a0a5e5/img/favicon.ico" type="image/x-icon">
+    <style>
+        /* Basic styling - full CSS should be in your style.css file */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .converter-box {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        #convert-btn {
+            background: #ff0000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #loading {
+            display: none;
+            text-align: center;
+        }
+        #download-section {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fab fa-youtube"></i>
+                <h1>YT Converter Pro</h1>
+            </div>
+            <p class="tagline">Fast YouTube to MP3/MP4 conversions</p>
+        </header>
+
+        <main class="main-content">
+            <div class="converter-box">
+                <div class="input-section">
+                    <div class="input-group">
+                        <input type="text" id="youtube-url" 
+                               placeholder="Paste YouTube link here..." 
+                               autocomplete="off"
+                               aria-label="YouTube URL">
+                        <button id="convert-btn">
+                            <i class="fas fa-exchange-alt"></i> Convert
+                        </button>
+                    </div>
+                </div>
+
+                <div class="options-section">
+                    <div class="format-options">
+                        <h3>Select Format:</h3>
+                        <div class="format-buttons">
+                            <button class="format-btn active" data-format="mp3" aria-label="MP3 format">
+                                <i class="fas fa-music"></i> MP3 (Audio)
+                            </button>
+                            <button class="format-btn" data-format="mp4" aria-label="MP4 format">
+                                <i class="fas fa-video"></i> MP4 (Video)
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="quality-options" id="quality-options">
+                        <h3>Select Quality:</h3>
+                        <div class="quality-buttons">
+                            <!-- Dynamic quality buttons will be inserted here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-section" id="result">
+                    <div class="loading" id="loading">
+                        <div class="spinner">
+                            <div class="spinner-circle"></div>
+                        </div>
+                        <p>Processing your request...</p>
+                        <p class="status-text" id="status-text"></p>
+                    </div>
+                    
+                    <div class="download-section" id="download-section">
+                        <div class="media-preview">
+                            <img id="video-thumbnail" src="" alt="Video thumbnail" class="thumbnail">
+                            <div class="media-info">
+                                <h3 id="video-title" class="media-title">Video Title</h3>
+                                <div class="meta-info">
+                                    <span id="video-duration" class="duration">
+                                        <i class="far fa-clock"></i> 00:00
+                                    </span>
+                                    <span id="file-size" class="file-size">
+                                        <i class="far fa-hdd"></i> 0 MB
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="download-actions">
+                            <a href="#" id="download-btn" class="download-btn" download>
+                                <i class="fas fa-download"></i> Download Now
+                            </a>
+                            <button id="new-conversion-btn" class="secondary-btn">
+                                <i class="fas fa-redo"></i> New Conversion
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="error-section" id="error-section">
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3 id="error-title">Error Occurred</h3>
+                            <p id="error-message">There was a problem processing your request.</p>
+                            <button id="retry-btn" class="retry-btn">
+                                <i class="fas fa-sync-alt"></i> Try Again
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <div class="how-to-use">
+                    <h2><i class="fas fa-question-circle"></i> How to use:</h2>
+                    <ol>
+                        <li>Paste YouTube URL in the box above</li>
+                        <li>Select MP3 (audio) or MP4 (video) format</li>
+                        <li>Choose your preferred quality</li>
+                        <li>Click "Convert" button</li>
+                        <li>Download your file when ready</li>
+                    </ol>
+                </div>
+                
+                <div class="disclaimer">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Disclaimer</h3>
+                    <p>This tool is for educational purposes only. Downloading copyrighted content may violate YouTube's Terms of Service. Please ensure you have the right to download any content before conversion.</p>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>© <span id="current-year"></span> YT Converter Pro. All rights reserved.</p>
+            <p class="credits">Made with <i class="fas fa-heart"></i> for video enthusiasts</p>
+        </footer>
+    </div>
+
+    <script>
+        // Basic initialization - full JS should be in script.js
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+    
+    <!-- Link to your JavaScript file -->
+    <script src="js/script.js"></script>
+</body>
+</html>
